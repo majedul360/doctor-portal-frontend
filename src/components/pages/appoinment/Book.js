@@ -1,8 +1,10 @@
 import { format } from "date-fns/esm";
 import React from "react";
-
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase/Firebase.int";
 const Book = ({ date, bookingInfo, setBooking }) => {
   const { name, slots } = bookingInfo;
+  const [user, loading, error] = useAuthState(auth);
   const formHandler = (e) => {
     e.preventDefault();
     const slot = e.target.slots.value;
@@ -40,13 +42,15 @@ const Book = ({ date, bookingInfo, setBooking }) => {
             </select>
             <input
               type="text"
-              placeholder="enter your name"
+              disabled
+              value={user ? user?.displayName : " "}
               className="input input-bordered w-full max-w-xs my-4"
               name="name"
             />
             <input
               type="email"
-              placeholder="enter your email"
+              disabled
+              value={user ? user?.email : ""}
               className="input input-bordered w-full max-w-xs my-4"
               name="email"
             />

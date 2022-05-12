@@ -1,7 +1,11 @@
+import { signOut } from "firebase/auth";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import auth from "../../firebase/Firebase.int";
 
 const Header = () => {
+  const [user, loading, error] = useAuthState(auth);
   return (
     <div className="navbar bg-base-100 px-2 md:px-8 lg:px-20">
       <div className="navbar-start">
@@ -53,10 +57,23 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link to="/login" className="text-xl">
-                Login
+              <Link to="/registar" className="text-xl">
+                Registar
               </Link>
             </li>
+            {user ? (
+              <li>
+                <span className="text-xl" onClick={() => signOut(auth)}>
+                  Log Out
+                </span>
+              </li>
+            ) : (
+              <li>
+                <Link to="/login" className="text-xl">
+                  Login
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
         <a className="btn btn-ghost normal-case text-xl">Doctors Strange</a>
@@ -90,10 +107,23 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link to="/login" className="text-xl">
-              Login
+            <Link to="/registar" className="text-xl">
+              Registar
             </Link>
           </li>
+          {user ? (
+            <li>
+              <span className="text-xl" onClick={() => signOut(auth)}>
+                Log Out
+              </span>
+            </li>
+          ) : (
+            <li>
+              <Link to="/login" className="text-xl">
+                Login
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </div>
