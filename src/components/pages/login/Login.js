@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../firebase/Firebase.int";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 
 const Login = () => {
   const {
@@ -18,6 +19,15 @@ const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   let setError;
+  // password reset email
+  const [sendPasswordResetEmail, sending, resetPasswordError] =
+    useSendPasswordResetEmail(auth);
+  const [email, setEmail] = useState("");
+
+  const passwordReset = () => {
+    sendPasswordResetEmail(email);
+  };
+
   // require auth
   const navigate = useNavigate();
   const location = useLocation();
@@ -48,6 +58,7 @@ const Login = () => {
                   required: true,
                   pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                 })}
+                onChange={(e) => setEmail(e.target.value)}
               />
               {errors.email?.type === "required" && (
                 <span className="text-red-500">required</span>
@@ -78,6 +89,9 @@ const Login = () => {
             </form>
             <p>
               new to doecots portal? <Link to="/registar">registar</Link>
+            </p>
+            <p className="cursor-pointer" onClick={() => passwordReset()}>
+              forgot password?
             </p>
           </div>
           <div className="divider">or</div>

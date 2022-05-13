@@ -43,14 +43,14 @@ const Book = ({ date, bookingInfo, setBooking }) => {
             <input
               type="text"
               disabled
-              value={user ? user?.displayName : " "}
+              value={user?.displayName || " "}
               className="input input-bordered w-full max-w-xs my-4"
               name="name"
             />
             <input
               type="email"
               disabled
-              value={user ? user?.email : ""}
+              value={user?.email || ""}
               className="input input-bordered w-full max-w-xs my-4"
               name="email"
             />
