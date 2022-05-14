@@ -6,6 +6,9 @@ import Appoinment from "./components/pages/appoinment/Appoinment";
 import Registar from "./components/pages/registar/Registar";
 import Login from "./components/pages/login/Login";
 import RequireAuth from "./components/requireAuth/RequireAuth";
+import Dashboard from "./components/pages/dashboard/Dashboard";
+import MyAppoinment from "./components/pages/dashboard/myAppoinment/MyAppoinment";
+import MyReviews from "./components/pages/dashboard/myReviews/MyReviews";
 function App() {
   return (
     <div>
@@ -21,6 +24,17 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<MyAppoinment />} />
+          <Route path="reviews" element={<MyReviews />} />
+        </Route>
         <Route path="/registar" element={<Registar />} />
         <Route path="/login" element={<Login />} />
       </Routes>

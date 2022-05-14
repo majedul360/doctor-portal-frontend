@@ -57,6 +57,11 @@ const Header = () => {
               </Link>
             </li>
             <li>
+              <Link to="/dashboard" className="text-xl">
+                Dashboard
+              </Link>
+            </li>
+            <li>
               <Link to="/registar" className="text-xl">
                 Registar
               </Link>
@@ -78,6 +83,7 @@ const Header = () => {
         </div>
         <a className="btn btn-ghost normal-case text-xl">Doctors Strange</a>
       </div>
+
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
           <li>
@@ -107,6 +113,11 @@ const Header = () => {
             </Link>
           </li>
           <li>
+            <Link to="/dashboard" className="text-xl">
+              Dashboard
+            </Link>
+          </li>
+          <li>
             <Link to="/registar" className="text-xl">
               Registar
             </Link>
@@ -126,6 +137,32 @@ const Header = () => {
           )}
         </ul>
       </div>
+
+      {/* drawer added */}
+      {user && (
+        <div className="navbar-end lg:hidden">
+          <label
+            tabIndex="0"
+            className="btn btn-ghost lg:hidden"
+            htmlFor="dashboard"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </label>
+        </div>
+      )}
     </div>
   );
 };
