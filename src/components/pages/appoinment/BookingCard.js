@@ -9,15 +9,15 @@ const BookingCard = ({ bookInfo, setBooking, setBookingInfo, date }) => {
         <div className="card-body items-center text-center">
           <h2 className="card-title capitalize">{name}</h2>
           <p>{format(date, "PP")}</p>
-          <p>{slots.length ? slots[0] : "Try Next Date"}</p>
+          <p>{slots?.length ? slots[0] : "Try Next Date"}</p>
           <p className="mb-2">
-            {slots.length} {slots.length > 0 ? "spaces" : "space"} Available
+            {slots?.length} {slots?.length > 0 ? "spaces" : "space"} Available
           </p>
           <div className="card-actions">
             <label
               htmlFor="book-appointment"
               className="btn btn-primary"
-              disabled={slots.length === 0}
+              disabled={slots?.length === 0}
               onClick={() => setBooking(true, setBookingInfo(bookInfo))}
             >
               Book Appointment

@@ -8,8 +8,30 @@ const Book = ({ date, bookingInfo, setBooking }) => {
   const formHandler = (e) => {
     e.preventDefault();
     const slot = e.target.slots.value;
-    console.log(slot);
-    setBooking(false);
+    const phone = e.target.phone.value;
+    const booking = {
+      treatment: name,
+      date: format(date, "PP"),
+      slot,
+      name: user.displayName,
+      email: user.email,
+      phone,
+    };
+
+    fetch("http://localhost:5000/bookings", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          alert("post successful");
+        } else {
+          alert("already booked");
+        }
+        setBooking(false);
+      });
   };
   return (
     <div>
@@ -55,10 +77,10 @@ const Book = ({ date, bookingInfo, setBooking }) => {
               name="email"
             />
             <input
-              type="password"
-              placeholder="enter your password"
+              type="number"
+              placeholder="enter your phone number"
               className="input input-bordered w-full max-w-xs my-4"
-              name="password"
+              name="phone"
             />{" "}
             <br />
             <input
