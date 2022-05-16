@@ -1,12 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   useSignInWithGoogle,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase/Firebase.int";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import useToken from "../../customHooks/CustomHooks";
 
 const Registar = () => {
   const {
@@ -23,6 +24,13 @@ const Registar = () => {
   // update user
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+  // use custom hooks for creating users and token
+  const [token] = useToken(user || gUser);
+
+  const navigate = useNavigate();
+  if (token) {
+    navigate("/");
+  }
   let setError;
   if (error || gError) {
     setError = (

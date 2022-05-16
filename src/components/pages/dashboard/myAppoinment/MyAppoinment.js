@@ -1,15 +1,27 @@
 import { format } from "date-fns";
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import auth from "../../../firebase/Firebase.int";
 
 const MyAppoinment = () => {
   const [user, loading, error] = useAuthState(auth);
   const [appoinments, setAppoinments] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
-    fetch(`http://localhost:5000/user/${user.email}`)
+    fetch(`http://localhost:5000/user/${user.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
-      .then((data) => setAppoinments(data));
+      .then((data) => {
+        setAppoinments(data);
+      })
+      .catch((error) => {
+        console.log(error?.message);
+      });
   }, []);
   return (
     <div className="overflow-x-auto">
@@ -24,7 +36,7 @@ const MyAppoinment = () => {
           </tr>
         </thead>
         <tbody>
-          {appoinments.map((appoinment, index) => (
+          {appoinments?.map((appoinment, index) => (
             <tr key={appoinment._id}>
               <th>{index + 1}</th>
               <td>{appoinment.name}</td>

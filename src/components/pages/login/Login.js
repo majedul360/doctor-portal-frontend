@@ -5,6 +5,7 @@ import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../firebase/Firebase.int";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
+import useToken from "../../customHooks/CustomHooks";
 
 const Login = () => {
   const {
@@ -28,12 +29,14 @@ const Login = () => {
     sendPasswordResetEmail(email);
   };
 
+  // token
+  const [token] = useToken(user || gUser);
   // require auth
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
-  if (user || gUser) {
+  if (token) {
     navigate(from, { replace: true });
   }
 
