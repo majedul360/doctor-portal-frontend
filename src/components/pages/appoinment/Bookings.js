@@ -11,12 +11,12 @@ const Bookings = ({ date }) => {
   const { isLoading, error, data } = useQuery(
     ["available", format(date, "PP")],
     () =>
-      fetch(`http://localhost:5000/available/${format(date, "PP")}`).then(
-        (res) => res.json()
-      )
+      fetch(
+        `https://doctor-2022.herokuapp.com/available/${format(date, "PP")}`
+      ).then((res) => res.json())
   );
   // useEffect(() => {
-  //   fetch(`http://localhost:5000/available/${format(date, "PP")}`)
+  //   fetch(`https://doctor-2022.herokuapp.com/available/${format(date, "PP")}`)
   //     .then((res) => res.json())
   //     .then((d) => setData(d));
   // }, [date]);

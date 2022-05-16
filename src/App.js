@@ -10,6 +10,7 @@ import Dashboard from "./components/pages/dashboard/Dashboard";
 import MyAppoinment from "./components/pages/dashboard/myAppoinment/MyAppoinment";
 import MyReviews from "./components/pages/dashboard/myReviews/MyReviews";
 import Users from "./components/pages/dashboard/users/Users";
+import RequireAdmin from "./requireAdmin/RequireAdmin";
 function App() {
   return (
     <div>
@@ -35,7 +36,14 @@ function App() {
         >
           <Route index element={<MyAppoinment />} />
           <Route path="reviews" element={<MyReviews />} />
-          <Route path="users" element={<Users />} />
+          <Route
+            path="users"
+            element={
+              <RequireAdmin>
+                <Users />
+              </RequireAdmin>
+            }
+          />
         </Route>
         <Route path="/registar" element={<Registar />} />
         <Route path="/login" element={<Login />} />

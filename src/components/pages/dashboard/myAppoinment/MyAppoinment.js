@@ -10,7 +10,7 @@ const MyAppoinment = () => {
   const [appoinments, setAppoinments] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`http://localhost:5000/user/${user.email}`, {
+    fetch(`https://doctor-2022.herokuapp.com/user/${user.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

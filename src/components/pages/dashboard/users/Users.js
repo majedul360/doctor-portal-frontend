@@ -10,16 +10,16 @@ const Users = () => {
   const {
     isLoading,
     error,
+    refetch,
     data: users,
   } = useQuery("users", () =>
-    fetch(`http://localhost:5000/users`, {
+    fetch(`https://doctor-2022.herokuapp.com/users`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }).then((res) => res.json())
   );
 
-  console.log(error?.message);
   return (
     <div className="overflow-x-auto">
       <table className="table w-full">
@@ -33,7 +33,12 @@ const Users = () => {
         </thead>
         <tbody>
           {users?.map((user, index) => (
-            <UserCard key={user._id} user={user} index={index} />
+            <UserCard
+              key={user._id}
+              user={user}
+              index={index}
+              refetch={refetch}
+            />
           ))}
         </tbody>
       </table>
