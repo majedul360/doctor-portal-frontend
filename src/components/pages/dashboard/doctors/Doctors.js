@@ -16,7 +16,9 @@ const Doctors = () => {
     error,
     data: services,
   } = useQuery("services", () =>
-    fetch("http://localhost:5000/services").then((res) => res.json())
+    fetch("https://doctor-2022.herokuapp.com/services").then((res) =>
+      res.json()
+    )
   );
 
   const imgApi = "e069200dfdb44e7555b2f5aeaf6a05dc";
@@ -35,10 +37,10 @@ const Doctors = () => {
           const doctor = {
             name: data.name,
             email: data.email,
-            speciality: data.speciality,
+            speciality: data.specialist,
             img: result.data.url,
           };
-          fetch("http://localhost:5000/doctors", {
+          fetch("https://doctor-2022.herokuapp.com/doctors", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -87,7 +89,7 @@ const Doctors = () => {
         <br />
         <select
           {...register("specialist")}
-          class="select select-bordered w-full max-w-xs"
+          className="select select-bordered w-full max-w-xs"
         >
           {services?.map((service) => (
             <option key={service._id} value={service.name}>
