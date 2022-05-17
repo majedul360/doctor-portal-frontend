@@ -5,7 +5,6 @@ import Book from "./Book";
 import BookingCard from "./BookingCard";
 
 const Bookings = ({ date }) => {
-  // const [data, setData] = useState([]);
   const [booking, setBooking] = useState(false);
   const [bookingInfo, setBookingInfo] = useState({});
   const { isLoading, error, data } = useQuery(
@@ -15,11 +14,7 @@ const Bookings = ({ date }) => {
         `https://doctor-2022.herokuapp.com/available/${format(date, "PP")}`
       ).then((res) => res.json())
   );
-  // useEffect(() => {
-  //   fetch(`https://doctor-2022.herokuapp.com/available/${format(date, "PP")}`)
-  //     .then((res) => res.json())
-  //     .then((d) => setData(d));
-  // }, [date]);
+
   return (
     <div className="py-16">
       <h3 className="text-center text-secondary text-2xl capitalize">

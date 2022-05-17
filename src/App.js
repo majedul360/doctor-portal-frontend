@@ -11,6 +11,7 @@ import MyAppoinment from "./components/pages/dashboard/myAppoinment/MyAppoinment
 import MyReviews from "./components/pages/dashboard/myReviews/MyReviews";
 import Users from "./components/pages/dashboard/users/Users";
 import RequireAdmin from "./requireAdmin/RequireAdmin";
+import Doctors from "./components/pages/dashboard/doctors/Doctors";
 function App() {
   return (
     <div>
@@ -41,6 +42,14 @@ function App() {
             element={
               <RequireAdmin>
                 <Users />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="doctors"
+            element={
+              <RequireAdmin>
+                <Doctors />
               </RequireAdmin>
             }
           />
