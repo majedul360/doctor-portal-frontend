@@ -3,7 +3,7 @@ import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase/Firebase.int";
 const Book = ({ date, bookingInfo, setBooking }) => {
-  const { name, slots } = bookingInfo;
+  const { name, slots, price } = bookingInfo;
   const [user, loading, error] = useAuthState(auth);
   const formHandler = (e) => {
     e.preventDefault();
@@ -13,6 +13,7 @@ const Book = ({ date, bookingInfo, setBooking }) => {
       treatment: name,
       date: format(date, "PP"),
       slot,
+      price,
       name: user.displayName,
       email: user.email,
       phone,

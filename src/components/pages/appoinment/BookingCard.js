@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import React from "react";
 
 const BookingCard = ({ bookInfo, setBooking, setBookingInfo, date }) => {
-  const { name, slots } = bookInfo;
+  const { name, slots, price } = bookInfo;
   return (
     <div>
       <div className="card w-96 bg-base-100 shadow-xl">
@@ -13,6 +13,7 @@ const BookingCard = ({ bookInfo, setBooking, setBookingInfo, date }) => {
           <p className="mb-2">
             {slots?.length} {slots?.length > 0 ? "spaces" : "space"} Available
           </p>
+          <p>Fee: ${price}</p>
           <div className="card-actions">
             <label
               htmlFor="book-appointment"

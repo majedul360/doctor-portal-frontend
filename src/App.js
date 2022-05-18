@@ -13,6 +13,7 @@ import Users from "./components/pages/dashboard/users/Users";
 import RequireAdmin from "./requireAdmin/RequireAdmin";
 import Doctors from "./components/pages/dashboard/doctors/Doctors";
 import ManageDoctors from "./components/pages/dashboard/manageDoctors/ManageDoctors";
+import Payment from "./components/payment/Payment";
 function App() {
   return (
     <div>
@@ -38,6 +39,7 @@ function App() {
         >
           <Route index element={<MyAppoinment />} />
           <Route path="reviews" element={<MyReviews />} />
+          <Route path="payment/:id" element={<Payment />} />
           <Route
             path="users"
             element={
